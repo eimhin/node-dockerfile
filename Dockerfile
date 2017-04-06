@@ -31,8 +31,8 @@ RUN apt-get update && \
     sudo update-ca-certificates -f && \
     sudo sudo /var/lib/dpkg/info/ca-certificates-java.postinst configure && \
     apt-get -y clean && \
-    apt-get install build-essential software-properties-common -y && \
     rm -rf /var/lib/apt/lists/* && \
+    apt-get install build-essential software-properties-common -y && \
     add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
     apt-get update && \
     apt-get install gcc-snapshot -y && \
