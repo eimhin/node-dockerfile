@@ -72,9 +72,8 @@ RUN git clone https://github.com/nodenv/nodenv.git ~/.nodenv && \
     git clone https://github.com/nodenv/node-build.git $(nodenv root)/plugins/node-build && \
     nodenv install $NODE_VERSION && \
     nodenv global $NODE_VERSION && \
-    nodenv rehash
-
-RUN npm install -g vue-cli
+    nodenv rehash && \
+    npm install -g vue-cli
 
 EXPOSE 22 4403 3000
 LABEL che:server:3000:ref=node-3000 che:server:3000:protocol=http
