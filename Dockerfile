@@ -34,6 +34,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     echo "#! /bin/zsh\n set -e\n sudo /usr/sbin/sshd -D &\n exec \"\$@\"" > /home/user/entrypoint.sh && chmod a+x /home/user/entrypoint.sh
 
+RUN apt-get update
 RUN apt-get install build-essential software-properties-common -y
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test -y
 RUN apt-get update
