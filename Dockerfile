@@ -58,19 +58,19 @@ RUN sudo locale-gen en_US.UTF-8 && \
     sed -i 's/# store-passwords = no/store-passwords = yes/g' /home/user/.subversion/servers && \
     sed -i 's/# store-plaintext-passwords = no/store-plaintext-passwords = yes/g' /home/user/.subversion/servers
 
-RUN touch ~/.zshrc && \
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" && \
-RUN git clone https://github.com/nodenv/nodenv.git ~/.nodenv && \
-RUN cd ~/.nodenv && \
-RUN src/configure && \
-RUN make -C src && \
-RUN echo 'export PATH="$HOME/.nodenv/bin:$PATH"' >> ~/.zshrc && \
-RUN export PATH="$HOME/.nodenv/bin:$PATH" && \
-RUN echo 'eval "$(nodenv init -)"' >> ~/.zshrc && \
-RUN eval "$(nodenv init -)" && \
-RUN git clone https://github.com/nodenv/node-build.git $(nodenv root)/plugins/node-build && \
-RUN nodenv install $NODE_VERSION && \
-RUN nodenv global $NODE_VERSION && \
+RUN touch ~/.zshrc
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+RUN git clone https://github.com/nodenv/nodenv.git ~/.nodenv
+RUN cd ~/.nodenv
+RUN src/configure
+RUN make -C src
+RUN echo 'export PATH="$HOME/.nodenv/bin:$PATH"' >> ~/.zshrc
+RUN export PATH="$HOME/.nodenv/bin:$PATH"
+RUN echo 'eval "$(nodenv init -)"' >> ~/.zshrc
+RUN eval "$(nodenv init -)"
+RUN git clone https://github.com/nodenv/node-build.git $(nodenv root)/plugins/node-build
+RUN nodenv install $NODE_VERSION
+RUN nodenv global $NODE_VERSION
 RUN nodenv rehash
 
 RUN npm install -g vue-cli
