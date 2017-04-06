@@ -14,7 +14,7 @@ RUN apt-get update && \
     curl \
     software-properties-common \
     python-software-properties \
-    bash-completion && \
+    bash-completion \
     zsh && \
     mkdir /var/run/sshd && \
     sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
