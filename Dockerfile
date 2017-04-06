@@ -30,11 +30,7 @@ RUN apt-get update && \
     sudo apt-get install openjdk-8-jdk-headless openjdk-8-source -y && \
     sudo update-ca-certificates -f && \
     sudo sudo /var/lib/dpkg/info/ca-certificates-java.postinst configure && \
-    apt-get -y clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    echo "#! /bin/zsh\n set -e\n sudo /usr/sbin/sshd -D &\n exec \"\$@\"" > /home/user/entrypoint.sh && chmod a+x /home/user/entrypoint.sh
-
-RUN apt-get update && \
+    apt-get update && \
     apt-get install build-essential software-properties-common -y && \
     add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
     apt-get update && \
@@ -43,7 +39,10 @@ RUN apt-get update && \
     apt-get install gcc-6 g++-6 -y && \
     update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6 && \
     apt-get install gcc-4.8 g++-4.8 -y && \
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8 && \
+    apt-get -y clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    echo "#! /bin/zsh\n set -e\n sudo /usr/sbin/sshd -D &\n exec \"\$@\"" > /home/user/entrypoint.sh && chmod a+x /home/user/entrypoint.sh
 
 ENV LANG en_GB.UTF-8
 ENV LANG en_US.UTF-8
@@ -56,12 +55,10 @@ RUN sudo locale-gen en_US.UTF-8 && \
     svn --version && \
     cd /home/user && ls -la && \
     sed -i 's/# store-passwords = no/store-passwords = yes/g' /home/user/.subversion/servers && \
-    sed -i 's/# store-plaintext-passwords = no/store-plaintext-passwords = yes/g' /home/user/.subversion/servers
-
-RUN git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
-    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-
-RUN git clone https://github.com/nodenv/nodenv.git ~/.nodenv && \
+    sed -i 's/# store-plaintext-passwords = no/store-plaintext-passwords = yes/g' /home/user/.subversion/servers && \
+    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
+    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc && \
+    git clone https://github.com/nodenv/nodenv.git ~/.nodenv && \
     cd ~/.nodenv && \
     src/configure && \
     make -C src && \
