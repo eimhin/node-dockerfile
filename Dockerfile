@@ -34,15 +34,15 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     echo "#! /bin/zsh\n set -e\n sudo /usr/sbin/sshd -D &\n exec \"\$@\"" > /home/user/entrypoint.sh && chmod a+x /home/user/entrypoint.sh
 
-RUN apt-get install build-essential software-properties-common -y && \
-    add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
-    apt-get update && \
-    apt-get install gcc-snapshot -y && \
-    apt-get update && \
-    apt-get install gcc-6 g++-6 -y && \
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6 && \
-    apt-get install gcc-4.8 g++-4.8 -y && \
-    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8;
+RUN apt-get install build-essential software-properties-common -y
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test -y
+RUN apt-get update
+RUN apt-get install gcc-snapshot -y
+RUN apt-get update
+RUN apt-get install gcc-6 g++-6 -y
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6
+RUN apt-get install gcc-4.8 g++-4.8 -y
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8
 
 ENV LANG en_GB.UTF-8
 ENV LANG en_US.UTF-8
