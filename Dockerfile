@@ -69,9 +69,8 @@ RUN git clone https://github.com/nodenv/nodenv.git ~/.nodenv && \
     export PATH="$HOME/.nodenv/bin:$PATH" && \
     echo 'eval "$(nodenv init -)"' >> ~/.zshrc && \
     eval "$(nodenv init -)" && \
-    git clone https://github.com/nodenv/node-build.git $(nodenv root)/plugins/node-build
-
-RUN nodenv install $NODE_VERSION && \
+    git clone https://github.com/nodenv/node-build.git $(nodenv root)/plugins/node-build && \
+    nodenv install $NODE_VERSION && \
     nodenv global $NODE_VERSION && \
     nodenv rehash
 
